@@ -1,2 +1,7 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h1>New Post</h1>
+
+<%= form_for :post do |f| %>
+  <%= f.text_field :title, placeholder: "Enter title" %>
+  <%= f.url_field :link, placeholder: "Enter url" %>
+  <%= f.submit "Submit" %>
+<% end %>
