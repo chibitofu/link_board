@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       flash[:danger] =  "Credentials Invalid"
-      redirect_to "/signup"
+      redirect_to root_path
     end
   end
 
@@ -18,5 +18,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-  
+
 end

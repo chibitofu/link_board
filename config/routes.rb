@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   get '/posts/new' => 'posts#new'
   post '/posts/new' => 'posts#create'
 
+  delete '/posts/:id' => 'posts#destroy', as: 'posts'
+
+  post '/login' => 'sessions#create'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

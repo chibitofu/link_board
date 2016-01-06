@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>LinkBoard</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -13,7 +14,7 @@
     <% if current_user %>
       <li>
         <a href="/" class="active">
-          <%= current_user.email %>
+          <%= current_user.name %>
         </a>
       </li>
       <li>
@@ -43,7 +44,7 @@
 
                   <h1>Login</h1>
 
-                  <%= form_for :user do |f| %>
+                  <%= form_for :user, url:{ :action => "create", :method => 'post', :controller =>  "sessions"} do |f| %>
                     <%= f.text_field :email, placeholder: "Enter your email" %>
                     <%= f.password_field :password, placeholder: "Enter your password" %>
                     <%= f.submit "Login" %>
@@ -76,7 +77,8 @@
 
                   <h1>Sign up</h1>
 
-                  <%= form_for :user do |f| %>
+                  <%= form_for :user, url:{ :action => "create", :method => 'post', :controller =>  "users"} do |f| %>
+                  <%= f.text_field :name, placeholder: "Enter your name" %>
                     <%= f.text_field :email, placeholder: "Enter your email" %>
                     <%= f.password_field :password, placeholder: "Enter your password" %>
                     <%= f.submit "Sign up" %>
@@ -95,8 +97,7 @@
 
     <%= yield %>
   </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
 </body>
 </html>

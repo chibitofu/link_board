@@ -2,12 +2,15 @@
 <h1>Posts</h1>
   <h4>Welcome, <%= current_user.email %></h4>
   <% @posts.each do |p| %>
-    <div class="panel panel-default">
+    <section class="panel panel-default">
       <div class="panel-body">
-        <strong><%= p.title %></strong><br>
-        <a href="<%= p.link %>"><%= p.link %></a>
+        <div>
+          <strong><%= p.title %></strong><br>
+          <a href="<%= p.link %>"><%= p.link %></a>
+        </div>
+        <%= link_to 'Destroy', posts_path(p.id) , method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => 'delete_post btn btn-danger' %>
       </div>
-    </div>
+    </section>
   <% end %>
   <div>
     <%= link_to 'New Post', '/posts/new', :class=> 'btn btn-success' %>
