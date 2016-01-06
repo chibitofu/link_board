@@ -1,11 +1,12 @@
 class PostsController < ApplicationController
   def index
     if current_user
-      @posts = Post.where(user_id: current_user.id)
+      @posts = Post.all()
     end
   end
 
   def new
+
   end
 
   def create
@@ -18,6 +19,10 @@ class PostsController < ApplicationController
   def destroy
     postDelete = Post.find(params[:id])
     postDelete.destroy
+  end
+
+  def comment
+
   end
 
   private
