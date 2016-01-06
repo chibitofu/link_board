@@ -5,17 +5,98 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 </head>
 <body>
-  <% if current_user %>
-  Signed in as <%= current_user.email %> | <%= link_to "Logout", '/logout' %>
-<% else %>
-  <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
-<% end %>
+  <div class="container">
+    <ul>
+    <% if current_user %>
+      <li>
+        <a href="/" class="active">
+          <%= current_user.email %>
+        </a>
+      </li>
+      <li>
+        <%= link_to 'Posts', '/' %>
+      </li>
+      <li>
+        <%= link_to 'New Post', '/posts/new' %>
+      </li>
+      <li>
+        <%= link_to "Logout", '/logout' %>
+      </li>
+      <% else %>
+        <li class="login pull-right">
+          <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#login">Login</button>
 
-<%= render "partials/flash" %>
+          <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby ="loginLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                      &times;
+                    </span>
+                  </button>
+                </div>
+                <div class="modal-body">
 
-<%= yield %>
+                  <h1>Login</h1>
 
+                  <%= form_for :user do |f| %>
+                    <%= f.text_field :email, placeholder: "Enter your email" %>
+                    <%= f.password_field :password, placeholder: "Enter your password" %>
+                    <%= f.submit "Login" %>
+                  <% end %>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="signup pull-right">
+          <button type='button' class="btn btn-success" data-toggle="modal" data-target="#signup">Sign up</button>
+
+          <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby ="signupLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                      &times;
+                    </span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <h1>Sign up</h1>
+
+                  <%= form_for :user do |f| %>
+                    <%= f.text_field :email, placeholder: "Enter your email" %>
+                    <%= f.password_field :password, placeholder: "Enter your password" %>
+                    <%= f.submit "Sign up" %>
+                  <% end %>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                  </button>
+        </li>
+    <% end %>
+  </ul>
+
+    <%= render "partials/flash" %>
+
+    <%= yield %>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 </body>
 </html>

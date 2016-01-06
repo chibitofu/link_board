@@ -30,6 +30,7 @@ gem 'uri-handler'
 
 gem 'pry'
 
+gem 'bootstrap_form'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

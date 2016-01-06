@@ -1,17 +1,19 @@
-<h1>Posts</h1>
 <% if current_user %>
-<h4>Welcome, <%= current_user.email %></h4>
-<% @posts.each do |p| %>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <strong><%= p.title %></strong><br>
-      <a href="<%= p.link %>"><%= p.link %></a>
+<h1>Posts</h1>
+  <h4>Welcome, <%= current_user.email %></h4>
+  <% @posts.each do |p| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <strong><%= p.title %></strong><br>
+        <a href="<%= p.link %>"><%= p.link %></a>
+      </div>
     </div>
+  <% end %>
+  <div>
+    <%= link_to 'New Post', '/posts/new', :class=> 'btn btn-success' %>
   </div>
-<% end %>
-<div>
-  <%= link_to 'New Post', '/posts/new' %>
-</div>
-<% else %>
-  <h1>Please login or signup!</h1>
+  <% else %>
+  <div class="jumbotron text-center">
+    <h1>Please login or sign up!</h1>
+  </div>
 <% end %>
