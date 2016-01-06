@@ -1,15 +1,24 @@
 <% if current_user %>
 <h1>Posts</h1>
   <h4>Welcome, <%= current_user.email %></h4>
-  <% @posts.each do |p| %>
+  <% @posts.each do |post| %>
     <section class="panel panel-default">
       <div class="panel-body">
         <div>
-          <strong><%= p.title %></strong><br>
-          <a href="<%= p.link %>"><%= p.link %></a>
+          <strong><%= post.title %></strong><br>
+          <a href="<%= post.link %>"><%= post.link %></a>
         </div>
-        <%= link_to 'Destroy', posts_path(p.id) , method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => 'delete_post btn btn-danger' %>
+        <div>
+        <%= link_to 'Destroy', posts_path(post.id) , method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => 'delete_post btn btn-danger' %>
+        <%= link_to 'Comment', posts_path(post.id), :class => 'btn btn-primary' %>
+        </div>
+        <div>
+          <% post.comment.each do |c| %>
+            <p><%= c.content %></p>
+          <% end %>
+        </div>
       </div>
+
     </section>
   <% end %>
   <div>
