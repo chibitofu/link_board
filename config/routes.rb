@@ -1,27 +1,12 @@
 Rails.application.routes.draw do
-  # get 'comments/new'
-  #
-  # get 'comments/create'
-  #
-  # get 'comments/edit'
-  #
-  # get 'comments/destroy'
-  #
-  # get 'comments/index'
-  #
-  # get 'comments/show'
-
-  # get 'sessions/new'
-  #
-  # get 'sessions/create'
-  #
-  # get 'sessions/destroy'
-  #
-  # get 'users/new'
-  #
-  # get 'users/create'
   root 'posts#index'
 
+  get '/posts' => 'posts#comment'
+  get '/posts/new' => 'posts#new'
+  post '/posts' => 'posts#create'
+  put '/posts' => 'posts#update'
+  delete '/posts/:id' => 'posts#destroy'
+  
   get 'users/comments' => 'users#comments'
 
   get '/signup' => 'users#new'
@@ -32,16 +17,9 @@ Rails.application.routes.draw do
 
   get '/logout' => 'sessions#destroy'
 
-  get '/posts/new' => 'posts#new'
-  post '/posts/new' => 'posts#create'
-
-  get '/posts/:id' => 'posts#comment'
-  post '/posts/:id' => 'comments#create'
-  delete '/posts/:id' => 'posts#destroy', as: 'posts'
-
-  post '/login' => 'sessions#create'
-
   get '/comments' => 'comments#index'
+  post '/comments' => 'comments#create'
+  get '/comments/:id' => 'comments#new'
   delete 'comments/:id' => 'comments#destroy'
 
   get '/comments/new' => 'comments#new'

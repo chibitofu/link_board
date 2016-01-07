@@ -5,12 +5,41 @@
     <section class="panel panel-default">
       <div class="panel-body">
         <div>
+          <%= link_to "post", posts_path(post.id) %>
           <strong><%= post.title %></strong><br>
           <a href="<%= post.link %>"><%= post.link %></a>
         </div>
         <div>
         <%= link_to 'Destroy', posts_path(post.id) , method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => 'delete_post btn btn-danger' %>
-        <%= link_to 'Comment', posts_path(post.id), :class => 'btn btn-primary' %>
+        <%= link_to 'Comment', comments_path(post.id), :class => 'btn btn-primary' %>
+
+                <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
+          Edit
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                <%= bootstrap_form_for :post, url:{ :action => "update", :method => 'put', :controller =>  "posts"} do |f| %>
+                  <%= f.text_field :title, value: post.title %>
+                  <%= f.url_field :link, value: post.link %>
+                  <%= f.primary "Submit" %>
+                <% end %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         </div>
         <div>
           <% post.comment.each do |c| %>

@@ -22,7 +22,12 @@ class PostsController < ApplicationController
   end
 
   def comment
+    
+  end
 
+  def update
+    @post_edit = Post.where(post_id: params[:id])
+    @post_edit.update(post_params)
   end
 
   private
